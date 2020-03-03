@@ -12,6 +12,8 @@ import plotly.express as px
 from datetime import datetime
 from datetime import time
 from datetime import timedelta
+import plotly.graph_objs as go
+from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 
 
 arq = r"C:\Users\Lucas\Desktop\PIBIC 19_20\dados\Plu.F11.08.2019.xlsx"
@@ -24,7 +26,7 @@ c = df['Sydney']
 d = df[1]
 
 class Evento:
-    def __init__(self, deltat,deltae,ptot, imed):
+    def __init__(self,deltae,ptot, imed):
         
         """
         Essa funcao define os parametros para definicao de um evento
@@ -32,7 +34,6 @@ class Evento:
         ptot e a precipitacao total de um evento em milimetros,
         imed e a intensidade media de um evento em milimetros por hora"""
         
-        self.deltat = timedelta(minutes = deltat)
         self.deltae = timedelta(minutes = deltae)
         self.ptot = float(ptot)
         self.imed = float(imed)
@@ -109,42 +110,57 @@ class Evento:
             
         
 class Discretizar:
-    def __init__(self, eventos):
+    def __init__(self, eventos,tempo_disc,deltat):
         self.eventos = eventos
+        self.tempo_d = tempo_disc #briza
+        self.deltat = timedelta(minutes = deltat)
     
-    def discretizando(self,tempo_disc):
+    def discretizando(self):
         eventos_disc = list()
         lista = list()
         aux = 0
         prec_acumulada = 0
         for i in self.eventos.keys():
-            print("novo evento")
             starting = self.eventos[i]['data'][0]
-            ending = self.eventos[i]['data'].tail(1)[len(eventos[i])-1]
-            date_range = pd.date_range(start = starting, end = ending, freq = '60min' )
+            ending = self.eventos[i]['data'].tail(1)[len(eventos[i])-1] + self.deltat        
+            date_range = pd.date_range(start = starting, end = ending, freq = self.tempo_d+'min' )
+            contador = 0
+            while contador < len(self.eventos[i]['data']):
                 
-            for j in self.eventos[i]['data']:
+            #for j in self.eventos[i]['data']:
+            
+                try:    #Esse try serve pra quando a data do evento é maior que a data a data
+                        #da lista discretizada
+                    date_r = date_range[aux].to_pydatetime() #date time discretizado
+                    date_j = self.eventos[i]['data'][contador].to_pydatetime()               #lista de eventos
                 
-                try:
-                    date_r = date_range[aux].to_pydatetime() 
-                    date_j = j.to_pydatetime()
-                
-                    if date_r >= date_j:                       
+                    if date_j <= date_r:                       
                         prec_acumulada += 0.2
                     else:
+                        #prec_acumulada += 0.2
                         lista.append([date_r,prec_acumulada])
-                        print(lista)
                         prec_acumulada = 0
                         aux += 1
-                except:                        
-                    lista = list()                            
+                    contador+=1
+                except:
+                    restante = (len(self.eventos[i]['data']) - contador)*0.2
+                    lista.append([date_r,restante])                    
                     prec_acumulada = 0
                     aux = 0
+                    break
             eventos_disc.append(lista)
+            lista = list() 
         dframe = {k: pd.DataFrame(eventos_disc[k], columns = ['data','prec']) for k in range(len(eventos_disc))}
             
         return dframe
+    
+    def qualquer_coisa(self):
+
+        data_a.write_html('first_figure.html', auto_open=True)
+
+class evento_stats(self):
+    
             
-eventos = Evento(5,60,5,3).definindo_eventos()
-eventos = Evento(5,60,5,3).sel_eventos(eventos)
-teste = Discretizar(eventos).discretizando(5)
+eventos = Evento(60,5,3).definindo_eventos()
+eventos = Evento(60,5,3).sel_eventos(eventos)
+teste = Discretizar(eventos,'5',5).discretizando()
