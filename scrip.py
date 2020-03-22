@@ -17,11 +17,12 @@ from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 import plotly.io as pio
 
 
-arq = r"C:\Users\Lucas\Desktop\PIBIC 19_20\dados\Plu.F11.08.2019.xlsx"
+#arq = r"C:\Users\Lucas\Desktop\PIBIC 19_20\dados\Plu.F11.08.2019.xlsx"
+arq = r"C:\Users\Lucas\Desktop\PIBIC 19_20\dados\TodosOsDadosPluFeitosa.xlsx"
 
-df = pd.read_excel(arq)
-df = df.drop(df.index[len(df)-1])
-    
+df = pd.read_excel(arq, sheet_name = "2019")
+#df = df.drop(df.index[len(df)-1])
+#df = df.drop(columns = ['Unnamed: 2','Unnamed: 3','Unnamed: 4','Unnamed: 5','Unnamed: 6','Unnamed: 7','Unnamed: 8','Unnamed: 9'])    
 
 c = df['Sydney']
 d = df[1]
@@ -59,10 +60,10 @@ class Evento:
             try:
                 dtime = df['data'][aux+1]-df['data'][aux]
                 if self.deltae.total_seconds() >= dtime.total_seconds():
-                    df1.append([df.loc[aux]['data'],df.loc[aux]['MLD144']])
+                    df1.append([df.loc[aux]['data'],0.2])
                     aux +=1
                 else:
-                    df1.append([df.loc[aux]['data'],df.loc[aux]['MLD144']])
+                    df1.append([df.loc[aux]['data'],0.2]) #Se usar pluv que não é 0.2 ,df.loc[aux]['MLD144']
                     eventos.append(df1)
                     df1 = list()
                     aux+=1
@@ -136,16 +137,18 @@ class Discretizar:
 
 lista = []
 
+
+
 ### o codigo a seguir gera uma planilha excel com o numero de eventos
-"""
+
 for i in range(5,300,20):             
     eventos = Evento(i,5,3).definindo_eventos()
     #eventos = Evento(i,5,3).sel_eventos(eventos)
     lista.append(len(eventos))
 
 df1 = pd.DataFrame(lista)
-df1.to_excel("deltae_5_300_20.xlsx") 
-"""
+df1.to_excel("deltae_5_300_20todososdados.xlsx") 
+
 ###############fim##################################
 
 
