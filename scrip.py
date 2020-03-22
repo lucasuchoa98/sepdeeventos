@@ -14,6 +14,7 @@ from datetime import time
 from datetime import timedelta
 import plotly.graph_objs as go
 from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
+import plotly.io as pio
 
 
 arq = r"C:\Users\Lucas\Desktop\PIBIC 19_20\dados\Plu.F11.08.2019.xlsx"
@@ -87,27 +88,7 @@ class Evento:
                 eventos.pop(j)
         return eventos
     
-    """def resumo(self, eventos):
-        print("Estatistica de cada evento\n ------------------------")
-        prec = list()
-        dur = list()
-        inte = list()
-        aux = 0
-        
-        for i in eventos.keys():
-            prec.append(eventos[i]['pre'].sum())
-            timedelta = eventos[i]['data'].tail(1)[len(eventos[i])-1] - eventos[i]['data'][0]
-            dur.append(timedelta.total_seconds())
-            inte.append(prec[aux]*60/(dur[aux]))
-            aux+=1
-        
-        print("Evento   Precipitação(mm)     Duração(min)    Itensidade Média(mm/h)")
-        for j,k in zip(range(aux-1),eventos.keys()):
-            print("%d    %.1f       %.0f      %.0f" %(k,prec[aux],dux[aux],inte[aux]))
-    """    
-        
-            
-            
+  
         
 class Discretizar:
     def __init__(self, eventos,tempo_disc,deltat):
@@ -119,48 +100,56 @@ class Discretizar:
         eventos_disc = list()
         lista = list()
         aux = 0
-        prec_acumulada = 0
         for i in self.eventos.keys():
             starting = self.eventos[i]['data'][0]
-            ending = self.eventos[i]['data'].tail(1)[len(eventos[i])-1] + self.deltat        
+            ending = self.eventos[i]['data'].tail(1)[len(eventos[i])-1]       
             date_range = pd.date_range(start = starting, end = ending, freq = self.tempo_d+'min' )
             contador = 0
-            while contador < len(self.eventos[i]['data']):
+            aux = 0
+            prec_acumulada = 0
+            while contador < len(self.eventos[i]['data']) and aux<len(date_range):
                 
-            #for j in self.eventos[i]['data']:
+                date_r = date_range[aux].to_pydatetime()                                #date time discretizado
+                date_j = self.eventos[i]['data'][contador].to_pydatetime()               #lista de eventos
             
-                try:    #Esse try serve pra quando a data do evento é maior que a data a data
-                        #da lista discretizada
-                    date_r = date_range[aux].to_pydatetime() #date time discretizado
-                    date_j = self.eventos[i]['data'][contador].to_pydatetime()               #lista de eventos
-                
-                    if date_j <= date_r:                       
-                        prec_acumulada += 0.2
-                    else:
-                        #prec_acumulada += 0.2
-                        lista.append([date_r,prec_acumulada])
-                        prec_acumulada = 0
-                        aux += 1
+                if date_j <= date_r + self.deltat:                       
+                    prec_acumulada += 0.2
                     contador+=1
-                except:
-                    restante = (len(self.eventos[i]['data']) - contador)*0.2
-                    lista.append([date_r,restante])                    
+                else:
+                    lista.append([date_r,prec_acumulada])
                     prec_acumulada = 0
-                    aux = 0
-                    break
+                    aux += 1
+                    
+            lista.append([date_r,prec_acumulada])
             eventos_disc.append(lista)
             lista = list() 
         dframe = {k: pd.DataFrame(eventos_disc[k], columns = ['data','prec']) for k in range(len(eventos_disc))}
             
         return dframe
     
-    def qualquer_coisa(self):
+    def grafico(self,evento):
+        df = evento[0]
+        fig = px.bar(df, x = 'data', y ='prec')
+        
+        
+        pio.write_html(fig, file='firs_figure.html', auto_open=True)
 
-        data_a.write_html('first_figure.html', auto_open=True)
+lista = []
 
-class evento_stats(self):
-    
-            
-eventos = Evento(60,5,3).definindo_eventos()
-eventos = Evento(60,5,3).sel_eventos(eventos)
-teste = Discretizar(eventos,'5',5).discretizando()
+### o codigo a seguir gera uma planilha excel com o numero de eventos
+"""
+for i in range(5,300,20):             
+    eventos = Evento(i,5,3).definindo_eventos()
+    #eventos = Evento(i,5,3).sel_eventos(eventos)
+    lista.append(len(eventos))
+
+df1 = pd.DataFrame(lista)
+df1.to_excel("deltae_5_300_20.xlsx") 
+"""
+###############fim##################################
+
+
+
+
+#teste = Discretizar(eventos,'5',5).discretizando()
+#grafico = Discretizar(eventos,'5',5).grafico(teste)
