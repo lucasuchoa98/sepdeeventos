@@ -137,22 +137,21 @@ class Discretizar:
 
 lista = []
 
+eventos = Evento(60,5,3).definindo_eventos()
+eventos = Evento(60,5,3).sel_eventos_ptot(eventos)
+eventos = Evento(60,5,3).sel_eventos_imed(eventos)
 
+discretizado = Discretizar(eventos,'5',5).discretizando()
+grafico = Discretizar(eventos,'5',5).grafico(discretizado)
 
 ### o codigo a seguir gera uma planilha excel com o numero de eventos
-
+"""
 for i in range(5,300,20):             
     eventos = Evento(i,5,3).definindo_eventos()
-    #eventos = Evento(i,5,3).sel_eventos(eventos)
+    #eventos = Evento(i,5,3).sel_eventos_imed(eventos)
     lista.append(len(eventos))
 
 df1 = pd.DataFrame(lista)
 df1.to_excel("deltae_5_300_20todososdados.xlsx") 
-
+"""
 ###############fim##################################
-
-
-
-
-#teste = Discretizar(eventos,'5',5).discretizando()
-#grafico = Discretizar(eventos,'5',5).grafico(teste)
