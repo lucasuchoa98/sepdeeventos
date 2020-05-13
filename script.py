@@ -90,9 +90,9 @@ class Evento:
         
 class Discretizar(Evento):
 
-    def __init__(self, deltae,ptot , imed, tempo_disc, deltat):
+    def __init__(self, deltae,ptot , imed, deltat):
         Evento.__init__(self, deltae,ptot , imed)
-        self.tempo_d = tempo_disc #briza
+        self.tempo_d = string(deltat)
         self.deltat = timedelta(minutes = deltat)
         self.disc = dict()
     
@@ -156,6 +156,6 @@ def gerar_dados():
 #evento.def_eventos()
 #evento.sel_by_ptot()
 #evento.sel_by_imed()
-#evento_discretizado = Discretizar(60,5,3,'5',5)
+#evento_discretizado = Discretizar(60,5,3,5)
 #evento_discretizado.discretizando()
 #evento_discretizado.grafico(0)
