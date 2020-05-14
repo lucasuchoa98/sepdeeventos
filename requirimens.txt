@@ -1,4 +1,0 @@
-python 3.7.3
-pandas 0.24.2
-plotly 4.6.0
-xlrd 1.2.0
