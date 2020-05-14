@@ -28,7 +28,7 @@ Então, certifique-se que sua planilha contenha apenas 3 colunas, com a **primei
 
 
         | Sydney    |    1    | MLD144 |
-        |25/05/2016	|02:21:00	|  0,20  |
+        |25/05/2016 |02:21:00 |  0,20  |
         |    .      |    .    |   .    |
         |    .      |    .    |   .    |
         |    .      |    .    |   .    |
@@ -43,8 +43,7 @@ Após essas adequações especiais, um exemplo de utilização do script a parti
 from script import Evento
 ``` 
 
-- Então você deve instanciar o nosso evento, aqui você vai definir os parametros que
-serão utilizados para para definir e filtrar os eventos.
+
 
 - deltae é o tempo (min) entre dados para que seja considerado um novo evento.
 
@@ -53,6 +52,9 @@ serão utilizados para para definir e filtrar os eventos.
 - imed é a intensidade média minima (mm/h) para que o evento seja considerado valido.
 
 - deltat é o tempo (min) que o evento será dicretizado.
+
+Então você deve instanciar o nosso evento, aqui você vai definir os parametros que
+serão utilizados para para definir e filtrar os eventos.
 
 ```bash  
 evento = Evento(deltae=60,ptot=5,imed=3,deltat=10)
