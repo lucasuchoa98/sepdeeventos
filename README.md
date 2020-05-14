@@ -9,9 +9,9 @@ Ao clonar o repositorio:
 
 para instalar via [pip](https://pip.pypa.io/en/stable/) é so abrir o cmd e:
 
-'''bash
+```bash
 pip install -r requirements.txt
-'''
+```
 Feito isso, lembre-se de:
 - atualizar o caminho da planilha com os dados de chuva que você deseja separar.
 
