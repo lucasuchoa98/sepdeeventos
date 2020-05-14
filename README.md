@@ -1,16 +1,17 @@
 # PIBIC19
 
 Este repositório é referente ao aplicativo desenvolvido durante o ciclo do PIBIC 2019/20 orientado pelo Professor Marllus Gustavo da Universidade Federal de Alagoas.
----------------
+
 
 Ao clonar o repositorio:
 
 - Atente-se aos requirimets.txt
 
-para instalar via pip é so abrir o cmd e:
+para instalar via [pip](https://pip.pypa.io/en/stable/) é so abrir o cmd e:
 
+'''bash
 pip install -r requirements.txt
-
+'''
 Feito isso, lembre-se de:
 - atualizar o caminho da planilha com os dados de chuva que você deseja separar.
 
