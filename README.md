@@ -1,9 +1,10 @@
 # PIBIC19
-Este repositório é referente ao aplicativo desenvolvido durante o ciclo do PIBIC 2019/20 orientado pelo Professor Marllus Gustavo da Universidade Federal de Alagoas.
 ==============
+Este repositório é referente ao aplicativo desenvolvido durante o ciclo do PIBIC 2019/20 orientado pelo Professor Marllus Gustavo da Universidade Federal de Alagoas.
+---------------
 
 Ao clonar o repositorio:
----------------
+
 - Atente-se aos requirimets.txt
 
 para instalar via pip é so abrir o cmd e:
