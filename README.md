@@ -21,7 +21,7 @@ Que ficaria assim
 
 Então, certifique-se que sua planilha contenha apenas 3 colunas, com a **primeira linha** contendo:
 
-        | Sydney    | 1       | MLD144 |
+        | Sydney    |    1    | MLD144 |
         |25/05/2016	|02:21:00	|  0,20  |
         |    .      |    .    |   .    |
         |    .      |    .    |   .    |
@@ -30,15 +30,15 @@ Então, certifique-se que sua planilha contenha apenas 3 colunas, com a **primei
 -------------
 Após essas adequações especiais, um exemplo de utilização do script a partir do power shell ou prompt de comando - no mesmo diretorio do arquivo script.py:
 
-- Primeiro você deve importar nosso modulo
+- Primeiro você deve importar nosso modulo:
   from script import Evento
   
-então você deve instanciar o nosso evento, aqui você vai definir os parametros que
+- Então você deve instanciar o nosso evento, aqui você vai definir os parametros que
 serão utilizados para para definir e filtrar os eventos.
-deltae é o tempo (min) entre dados para que seja considerado um novo evento.
-ptot é a precipitação total minima (mm) para que o evento seja considerado valido.
-imed é a intensidade média minima (mm/h) para que o evento seja considerado valido.
-deltat é o tempo (min) que o evento será dicretizado.
+- deltae é o tempo (min) entre dados para que seja considerado um novo evento.
+- ptot é a precipitação total minima (mm) para que o evento seja considerado valido.
+- imed é a intensidade média minima (mm/h) para que o evento seja considerado valido.
+- deltat é o tempo (min) que o evento será dicretizado.
   
   evento = Evento(deltae=60,ptot=5,imed=3,deltat=10)
   evento.def_eventos()
