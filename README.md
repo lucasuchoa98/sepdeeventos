@@ -12,18 +12,18 @@ para instalar via [pip](https://pip.pypa.io/en/stable/) é so abrir o cmd e:
 ```bash
 pip install -r requirements.txt
 ```
-## Lembre-se de:
+## Lembre-se
 - atualizar o caminho da planilha com os dados de chuva que você deseja separar.
 
 Por exemplo:
-
+```python
 arq = r"<caminho_da_planilha.xlsx"
-
+```
 Que ficaria assim
 
-
+```python
 arq = r"C:\Users\Lucas\Desktop\PIBIC19_20\dados\Plu_trincheira.xlsx"
-
+```
 Então, certifique-se que sua planilha contenha apenas 3 colunas, com a **primeira linha** contendo:
 
 
