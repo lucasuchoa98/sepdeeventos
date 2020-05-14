@@ -42,17 +42,6 @@ Após essas adequações especiais, um exemplo de utilização do script a parti
 ```bash
 from script import Evento
 ``` 
-
-
-
-- deltae é o tempo (min) entre dados para que seja considerado um novo evento.
-
-- ptot é a precipitação total minima (mm) para que o evento seja considerado valido.
-
-- imed é a intensidade média minima (mm/h) para que o evento seja considerado valido.
-
-- deltat é o tempo (min) que o evento será dicretizado.
-
 Então você deve instanciar o nosso evento, aqui você vai definir os parametros que
 serão utilizados para para definir e filtrar os eventos.
 
@@ -65,6 +54,15 @@ evento.sel_by_ptot()
 
 evento.sel_by_imed()
 ``` 
+Onde:
+- deltae é o tempo (min) entre dados para que seja considerado um novo evento.
+
+- ptot é a precipitação total minima (mm) para que o evento seja considerado valido.
+
+- imed é a intensidade média minima (mm/h) para que o evento seja considerado valido.
+
+- deltat é o tempo (min) que o evento será dicretizado.
+
 Agora, o evento já foi instanciado e já foi filtrado, e você pode fazer algumas coisas com ele, por exemplo:
 
 - Se você quiser as keys (chaves) dos seus eventos, então:
