@@ -1,0 +1,17 @@
+{% extends 'eventodef/base.html' %}
+{% load static %}
+{% block content%}
+<h1 style="text-align: center; color: white; background-color: #6d7993;"> Separador de eventos </h1>
+<div class="container">
+    {% if evento %}
+        <p style="color: white;">Após a filtragem {{ n_eventos_filtered}} eventos foram selecionados</p>
+        <p style="color: white;">Para baixar a planilha excel com os eventos separados, clique em Download</p>
+        <a href="{{endereco}}"><button class="btn btn-outline-light"><i class="fa fa-download"></i> Download</button></a>
+        <div>
+            {{ grafico|safe }}
+        </div>
+    {% else %}
+        <h2 style="color: white; text-align: center;"> Você não tem nenhum evento :( </h2>
+    {% endif %}
+</div>
+{% endblock content%}

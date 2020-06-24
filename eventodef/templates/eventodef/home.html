@@ -1,0 +1,77 @@
+{% extends 'eventodef/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<body>
+    <script type="text/javascript">
+        function ShowHideDiv(chk) {
+            if (chk == chk1) {
+                var dvPassport = document.getElementById("dvPassport1");
+                dvPassport.style.display = chk.checked ? "block" : "none";
+            } else  if (chk == chk2 ){
+                var dvPassport = document.getElementById("dvPassport2");
+                dvPassport.style.display = chk.checked ? "block" : "none";
+            } else {
+                var dvPassport = document.getElementById("dvPassport3");
+                dvPassport.style.display = chk.checked ? "block" : "none";
+            }
+
+        }
+    </script>
+    <h1 style="text-align: center; color: white; background-color: #6d7993;"> Separador de eventos </h1>
+        <br>
+        <div class="container">
+            <form  action = "{% url 'eventodef:resultado' %}" method='POST' id="form" enctype="multipart/form-data" name='upload' style="margin:10px">
+                {% csrf_token %}
+                <div >
+                    <div class="form-field" style="color: white; ">
+                        {{form.file}}
+                    </div>
+                    <div class="form-field" style="color: white;">
+                        <label> Tempo entre dados (min):</label>
+                        {{form.deltae}}
+                    </div>
+                    <hr>
+                    <h3 style="color: white;">
+                        Filtragem disponivel:
+                    </h3>
+                    <div class="form-field" style="color: white;">
+                    <label for="chk1">
+                        <input type="checkbox" id="chk1" onclick="ShowHideDiv(this)" />
+                        Precipitação Mínima
+                    </label>
+                    <div id="dvPassport1" style="display: none">
+                        Digite aqui precipitação minima (mm):
+                        {{form.ptot}}
+                    </div>
+                    </div>
+                    <div class="form-field" style="color: white;">
+                    <label for="chk2">
+                        <input type="checkbox" id="chk2" onclick="ShowHideDiv(this)" />
+                        Intensidade Mínima
+                    </label>
+                    <div id="dvPassport2" style="display: none">
+                        Digite aqui intensidade mínima (mm/h):
+                        {{form.imed}}
+                    </div>
+                    <h3 style="color: white;">
+                        Discretização do evento:
+                    </h3>
+                    <div class="form-field" style="color: white;">
+                    <label for="chk3">
+                        <input type="checkbox" id="chk3" onclick="ShowHideDiv(this)" />
+                        Discretizar
+                    </label>
+                    <div id="dvPassport3" style="display: none">
+                        Digite aqui o tempo de discretização (min):
+                        {{form.deltat}}
+                    </div>
+                    </div>
+                </div>
+                <hr>
+                    <input id="form-button" class="btn"  
+                type="submit" value="Continue">
+            </form>
+        </div>
+</body>
+{% endblock content %}
