@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '68649g^58%c!6xynxiyn@eh1e*112ss_vn@7a7+&#s=1%u9i%-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['separadordeeventos.herokuapp.com','127.0.0.1:8000']
+ALLOWED_HOSTS = ['separadordeeventos.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -142,4 +142,3 @@ FILE_UPLOAD_HANDLERS = (
 
 #  Add configuration for static files storage using whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
