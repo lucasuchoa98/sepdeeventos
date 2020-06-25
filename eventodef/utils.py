@@ -34,7 +34,7 @@ class Evento:
         self.tempo_d = str(deltat)
         self.deltat = timedelta(minutes = deltat)
         lista = []
-        for i in range(len(self.df)):
+        for i in range(self.df.shape[0]):
             data = datetime(c[i].year, c[i].month, c[i].day, d[i].hour, d[i].minute, d[i].second)      
             lista.append(data)
         
@@ -82,7 +82,7 @@ class Evento:
                 
     def sel_by_imed(self):
         for j in self.dframe.copy().keys():
-            self.timedelta = self.dframe[j]['data'].tail(1)[len(self.dframe[j])-1] - self.dframe[j]['data'][0]
+            self.timedelta = self.dframe[j]['data'][len(self.dframe[j])-1] - self.dframe[j]['data'][0]
             if ((self.dframe[j]['pre'].sum()*3600)/self.timedelta.total_seconds()) < self.imed:
                 self.dframe.pop(j)
 
@@ -92,14 +92,14 @@ class Evento:
         aux = 0
         for i in self.dframe.keys():
             starting = self.dframe[i]['data'][0]
-            ending = self.dframe[i]['data'].tail(1)[len(self.dframe[i])-1]       
+            ending = self.dframe[i]['data'][len(self.dframe[i])-1]       
             date_range = pd.date_range(start = starting, end = ending, freq = self.tempo_d+'min' )
             #o contador percorre o dframe, ou seja, não discretizado
             contador = 0
             #aux percorre o date_range, ou seja, discretizado
             aux = 0  
             prec_acumulada = 0
-            while contador < len(self.dframe[i]['data']) and aux < len(date_range):
+            while contador < len(self.dframe[i]['data']) and aux < date_range.size:
                 
                 date_r = date_range[aux].to_pydatetime()                                #date time discretizado
                 date_j = self.dframe[i]['data'][contador].to_pydatetime()               #lista de eventos
