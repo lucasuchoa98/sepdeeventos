@@ -1,1 +1,1 @@
-web: gunicorn separadordeeventos.wsgi --log-file -
+web: gunicorn pibic.wsgi --log-file -
