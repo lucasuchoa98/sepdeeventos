@@ -62,7 +62,6 @@ def home(request):
 
 def result_view(request):
     if request.method =='GET':
-        print(request.GET)
         context = {'evento':False}
         return render(request, 'eventodef/resultado.html', context)
     else:
@@ -121,10 +120,10 @@ def result_view(request):
             
             n_eventos_filtered = len(evento.dframe)
             keys = evento.dframe.keys()
-            grafico = evento.grafico(0)
+            #grafico = evento.grafico(0)
             
+            #'grafico': grafico,
             context = {'evento':evento,
-             'grafico': grafico,
              'n_eventos':n_eventos,
              'n_eventos_filtered':n_eventos_filtered,
              'keys':keys,

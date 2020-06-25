@@ -1,5 +1,6 @@
 {% extends 'eventodef/base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block content %}
 <body>
@@ -26,6 +27,24 @@
                 <div >
                     <div class="form-field" style="color: white; ">
                         {{form.file}}
+                    </div>
+                    <div>
+                        <br>
+                        <p style="color: white;"> Por favor, assegure que a planilha contenha apenas 3 colunas, respectivamente:</p>
+                        <ul>
+                            <li style="color: white;">Primeira celula preenchida com Sydney</li>
+                            <li style="color: white;">Primeira celula preenchida com 1</li>
+                            <li style="color: white;">Primeira celula preenchida com MLD144</li>
+                        </ul>
+                        <p style="color: white;"> Como na imagem abaixo:</p>
+                        <img src="{% static "planilha.png" %}" alt="Planilha">
+                        <p style="color: white;">As colunas encabeçada com <strong>Sydney</strong>, <strong>1</strong> e <strong>MLD144</strong> devem conter:</p>
+                        <ul>
+                            <li style="color: white;">Data (DD/MM/AAAA)</li>
+                            <li style="color: white;">Hora (HH:MM:SS)</li>
+                            <li style="color: white;">Precipitação (mm)</li>
+                        </ul>
+                        <br>
                     </div>
                     <div class="form-field" style="color: white;">
                         <label> Tempo entre dados (min):</label>
