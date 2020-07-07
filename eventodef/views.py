@@ -10,11 +10,11 @@ import os
 import plotly.io as pio
 import plotly
 import plotly.express as px
-
 import mimetypes
 from django.conf import settings
 
 # Create your views here.
+#apenas teste
 
 def home(request):
     if request.method == "POST":
