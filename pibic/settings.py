@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'eventodef',
     'import_export',
+    'debug_toolbar',
     
     'crispy_forms',
 
@@ -53,6 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'pibic.urls'
@@ -142,3 +145,14 @@ FILE_UPLOAD_HANDLERS = (
 
 #  Add configuration for static files storage using whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+INTERNAL_IPS = [
+
+    '127.0.0.1',
+
+]
+
+import djcelery
+djcelery.setup_loader()
+
+BROKER_URL = 'redis://localhost:6379/0'
