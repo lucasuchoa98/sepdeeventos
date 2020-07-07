@@ -14,7 +14,7 @@ import mimetypes
 from django.conf import settings
 
 # Create your views here.
-#apenas teste
+# apenas teste
 
 def home(request):
     if request.method == "POST":
