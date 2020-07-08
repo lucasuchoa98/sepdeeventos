@@ -152,7 +152,6 @@ INTERNAL_IPS = [
 
 ]
 
-import djcelery
-djcelery.setup_loader()
-
-BROKER_URL = 'redis://localhost:6379/0'
+CELERY_BROKER_URL = 'redis://h:p065d6fac751ae220168ec1a7ef857a0585913f30d028d186506ed1d54a3f3e03@ec2-54-83-245-251.compute-1.amazonaws.com:28759'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
