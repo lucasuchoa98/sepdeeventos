@@ -6,15 +6,14 @@ import pandas as pd
 from .utils import Evento as objeto
 from django.core.files import File
 import os
+from io import BytesIO
 
 import plotly.io as pio
 import plotly
 import plotly.express as px
 import mimetypes
 from django.conf import settings
-
-# Create your views here.
-# apenas teste
+from .tasks import process_file_task
 
 def home(request):
     if request.method == "POST":
@@ -72,6 +71,7 @@ def result_view(request):
             dfs = {sheet: workbook.parse(sheet) for sheet in workbook.sheet_names}
             df = dfs['Planilha1']
             deltae = float(request.POST.get('deltae'))
+
             if request.POST.get('ptot') == '':
                 ptot = 0
             else:
@@ -109,7 +109,17 @@ def result_view(request):
                 result = pd.concat([arow,ndf],ignore_index= True)
                 big_df = big_df.append(result, ignore_index= True)
                 result = pd.DataFrame()
- 
+
+            with BytesIO() as b:    
+                writer = pd.ExcelWriter(b, engine= 'xlsxwriter')  
+                big_df.to_excel(writer, sheet_name='planilha1')
+                writer.save()
+                response = HttpResponse(b.getvalue(), content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                response['Content-Disposition'] = "attachment; filename=eventos_separados.xlsx"
+
+            return response
+
+            """
             big_df.to_excel('evento_separados.xlsx',sheet_name='planilha1')
             modelo_instance = Evento()
 
@@ -130,6 +140,7 @@ def result_view(request):
              'endereco':endereco
              }
         return render(request, 'eventodef/resultado.html', context)
+        """
 
 def download_file(request, path):
     # fill these variables with real values
