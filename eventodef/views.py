@@ -13,7 +13,6 @@ import plotly
 import plotly.express as px
 import mimetypes
 from django.conf import settings
-from .tasks import process_file_task
 
 def home(request):
     if request.method == "POST":
